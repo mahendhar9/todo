@@ -1,7 +1,15 @@
+body {
+  overflow-x: hidden;
+}
+
 .todo-row {
   margin-top: 50px;
 }
 
 input[type='text'] {
   margin: 10px 0 0 5px;
+}
+
+.submit-btn {
+  margin-top: 9px;
 }

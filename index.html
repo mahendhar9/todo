@@ -21,17 +21,18 @@
     </head>
     <body ng-controller = "todoController">
       <div class="row todo-row">
-        <div class="col-md-12 text-center">
-          <div ng-repeat = "todo in todos">
-            <div class="form-group">
-              <input type = "checkbox", ng-model = "todo.done" />
-              <input type = "text", ng-model = "todo.text" />
-              <a href = "" ng-click = "deleteTask($index)">Delete</a>
-            </div>
+        <div class="col-md-offset-4 col-md-4 text-center">
+          <div ng-repeat = "todo in todos" class = "form-inline">
+            <input type = "checkbox", class="checkbox", ng-model = "todo.done" />
+            <input type = "text", class="form-control", ng-model = "todo.text" />
+            <a href = "" ng-click = "moveDown($index)">Down</a>
+            <a href = "" ng-click = "deleteTask($index)">Delete</a>
           </div>
           <form ng-submit = "addTodo()" >
-            <input type = "text" ng-model = "newTodoText" />
-            <input type = "submit" />
+           <div class="form-group form-inline">
+              <input type = "text", class="form-control", ng-model = "newTodoText" />
+              <input type = "submit", class="form-control submit-btn btn-primary" />
+            </div>
           </form>
         </div>
       </div>
