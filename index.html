@@ -20,7 +20,20 @@
       <![endif]-->
     </head>
     <body ng-controller = "todoController">
-      <h1>Hello, world!</h1>
-
+      <div class="row todo-row">
+        <div class="col-md-12 text-center">
+          <div ng-repeat = "todo in todos">
+            <div class="form-group">
+              <input type = "checkbox", ng-model = "todo.done" />
+              <input type = "text", ng-model = "todo.text" />
+              <a href = "" ng-click = "deleteTask($index)">Delete</a>
+            </div>
+          </div>
+          <form ng-submit = "addTodo()" >
+            <input type = "text" ng-model = "newTodoText" />
+            <input type = "submit" />
+          </form>
+        </div>
+      </div>
     </body>
     </html>

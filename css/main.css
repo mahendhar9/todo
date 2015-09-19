@@ -1,1 +1,7 @@
-main.css
+.todo-row {
+  margin-top: 50px;
+}
+
+input[type='text'] {
+  margin: 10px 0 0 5px;
+}
