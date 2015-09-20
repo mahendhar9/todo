@@ -19,10 +19,18 @@ todoApp.controller('todoController', ['$scope', function($scope){
     $scope.todos.splice(start, 1);
   };
 
-  $scope.moveDown = function(index) {
-    var downItem = $scope.todos[index];
-    $scope.todos.splice(index + 2, 0, downItem);
+  $scope.move = function(index, direction) {
+    if (direction == 'up') {
+      if (index == 0) {
+        return;
+      }
+      index = index - 1;
+    }
+    var moveItem = $scope.todos[index];
+    $scope.todos.splice(index + 2, 0, moveItem);
     $scope.todos.splice(index, 1);
   };
 
 }]);
+
+

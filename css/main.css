@@ -10,6 +10,15 @@ input[type='text'] {
   margin: 10px 0 0 5px;
 }
 
+ul li {
+  list-style: none;
+}
+
+.fa-trash-o {
+  color: red;
+}
+
 .submit-btn {
   margin-top: 9px;
 }
+

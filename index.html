@@ -8,10 +8,14 @@
   <title>ToDo App</title>
   
   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link href="css/main.css" rel="stylesheet">
 
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <script src="js/angular.min.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/main.js"></script>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -22,19 +26,25 @@
     <body ng-controller = "todoController">
       <div class="row todo-row">
         <div class="col-md-offset-4 col-md-4 text-center">
-          <div ng-repeat = "todo in todos" class = "form-inline">
-            <input type = "checkbox", class="checkbox", ng-model = "todo.done" />
-            <input type = "text", class="form-control", ng-model = "todo.text" />
-            <a href = "" ng-click = "moveDown($index)">Down</a>
-            <a href = "" ng-click = "deleteTask($index)">Delete</a>
-          </div>
-          <form ng-submit = "addTodo()" >
-           <div class="form-group form-inline">
-              <input type = "text", class="form-control", ng-model = "newTodoText" />
-              <input type = "submit", class="form-control submit-btn btn-primary" />
+          <ul id="sortable">
+            <div ng-repeat = "todo in todos" class = "form-inline">
+              <li>
+                <input type = "checkbox", class="checkbox", ng-model = "todo.done" />
+                <input type = "text", class="form-control", ng-model = "todo.text" id = "taskText" data-order="$index" />
+                <a href = "" ng-click = "move($index, 'up')"><i class="fa fa-arrow-up"></i></a>
+                <a href = "" ng-click = "move($index, 'down')"><i class="fa fa-arrow-down"></i></a>
+                <a href = "" ng-click = "deleteTask($index)"><i class="fa fa-trash-o"></i></a>
+              </li>
             </div>
-          </form>
+          </ul>
         </div>
-      </div>
-    </body>
-    </html>
+        <form ng-submit = "addTodo()" >
+         <div class="form-group form-inline">
+          <input type = "text", class="form-control", ng-model = "newTodoText" />
+          <input type = "submit", class="form-control submit-btn btn-primary" />
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
