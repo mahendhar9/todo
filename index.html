@@ -18,8 +18,8 @@
   <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
   <!-- AngularFire -->
   <script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-sortable/0.13.4/sortable.min.js"></script>
   <script src="js/app.js"></script>
-  <script src="js/main.js"></script>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -30,7 +30,7 @@
     <body ng-controller = "todoController">
       <div class="row add-todo-row">
         <div class="col-md-12 text-center">
-          <form ng-submit = "addTodo()" >
+          <form ng-submit = "addTask()" >
            <div class="form-group form-inline">
             <input type = "text", class="form-control", ng-model = "newTodoText" />
             <input type = "submit", value = "Add Todo", class="form-control submit-btn btn-primary" />
@@ -40,11 +40,11 @@
     </div>
     <div class="row todos-row">
       <div class="col-md-offset-3 col-md-6 text-center">
-        <ul id="sortable">
-          <div ng-repeat = "todo in todos" class = "form-inline">
+        <ul ui-sortable="sortableOptions" ng-model = "tasks" id="sortable">
+          <div ng-repeat = "task in tasks| orderBy:'position'" class = "form-inline">
             <li>
-              <input type = "checkbox"  ng-model = "todo.done" />
-              <input type = "text" class="form-control" ng-model = "todo.text" id = "taskText" data-order="$index" />
+              <input type = "checkbox"  ng-model = "task.done" ng-change = "updateDone($index)" />
+              <input type = "text" class="form-control" ng-model = "task.text" id = "taskText" data-order="$index" />
                 <!-- <a href = "" ng-click = "move($index, 'up')"><i class="fa fa-arrow-up"></i></a>
                 <a href = "" ng-click = "move($index, 'down')"><i class="fa fa-arrow-down"></i></a> -->
                 <span class="handle"><i class="fa fa-arrows fa-lg"></i></span>
@@ -57,6 +57,6 @@
       </div>
 
   
-      <span class="todo-json">The todos are {{ todos | json }}</span>
+      <span class="todo-json">The todos are {{ tasks | json }}</span>
     </body>
     </html>
