@@ -13,9 +13,10 @@
 
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <script src="js/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
   <script src="js/app.js"></script>
-  <script src="js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-sortable/0.13.4/sortable.min.js"></script>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -23,28 +24,33 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
     </head>
-    <body ng-controller = "todoController">
-      <div class="row todo-row">
-        <div class="col-md-offset-4 col-md-4 text-center">
-          <ul id="sortable">
-            <div ng-repeat = "todo in todos" class = "form-inline">
-              <li>
-                <input type = "checkbox", class="checkbox", ng-model = "todo.done" />
-                <input type = "text", class="form-control", ng-model = "todo.text" id = "taskText" data-order="$index" />
-                <a href = "" ng-click = "move($index, 'up')"><i class="fa fa-arrow-up"></i></a>
-                <a href = "" ng-click = "move($index, 'down')"><i class="fa fa-arrow-down"></i></a>
-                <a href = "" ng-click = "deleteTask($index)"><i class="fa fa-trash-o"></i></a>
-              </li>
-            </div>
-          </ul>
-        </div>
-        <form ng-submit = "addTodo()" >
-         <div class="form-group form-inline">
-          <input type = "text", class="form-control", ng-model = "newTodoText" />
-          <input type = "submit", class="form-control submit-btn btn-primary" />
-        </div>
-      </form>
+    <body ng-controller = "todoController" ng-init="init()">
+      <div class="row add-todo-row">
+        <div class="col-md-12 text-center">
+          <form ng-submit = "addTodo()" >
+           <div class="form-group form-inline">
+            <input type = "text", class="form-control", ng-model = "newTodoText" />
+            <input type = "submit", value = "Add Todo", class="form-control submit-btn btn-primary" />
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
-</body>
-</html>
+    <div class="row todos-row">
+      <div class="col-md-offset-3 col-md-6 text-center">
+        <ul ui-sortable="sortableOptions" ng-model="data" id="tasks">
+          <div ng-repeat = "task in data track by $index" class = "form-inline">
+            <li>
+              <input type = "checkbox"  ng-model = "task.done" />
+              <input type = "text" class="form-control" ng-model = "task.text" id = "taskText" data-order="$index" />
+              <span class="handle"><i class="fa fa-arrows fa-lg"></i></span>
+              <a href = "" ng-click = "deleteTask($index)"><i class="fa fa-trash-o fa-lg"></i></a>
+              <hr>
+            </li>
+          </div>
+        </ul>
+      </div>
+    </div>
+
+    <span class = "local-data">The list is {{data}}</span>
+  </body>
+  </html>

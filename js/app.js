@@ -1,35 +1,34 @@
-var todoApp = angular.module('todoApp',[]);
+var todoApp = angular.module('todoApp', ['ngStorage','ui.sortable']);
 
-todoApp.controller('todoController', ['$scope', function($scope){
-  $scope.todos = [
-  {done: false, text: "First Todo"},
-  {done: false, text: "Second Todo"}
-  ];
+todoApp.controller('todoController', ['$scope', '$localStorage', function($scope, $localStorage){
+
+  $scope.tasks = [];
+  $scope.data = $localStorage.tasksList;
+
 
   $scope.addTodo = function() {
     var newTodo = {
       done: false,
       text: $scope.newTodoText
     };
-    $scope.todos.push(newTodo);
+    $scope.data.push(newTodo);
+    // $localStorage.tasksList = $scope.tasks;
     $scope.newTodoText = '';
   };
 
   $scope.deleteTask = function(start) {
-    $scope.todos.splice(start, 1);
+    $scope.data.splice(start, 1);
   };
 
-  $scope.move = function(index, direction) {
-    if (direction == 'up') {
-      if (index == 0) {
-        return;
-      }
-      index = index - 1;
-    }
-    var moveItem = $scope.todos[index];
-    $scope.todos.splice(index + 2, 0, moveItem);
-    $scope.todos.splice(index, 1);
+  $scope.sortableOptions= {
+    handle: '.handle'
   };
+
+  // $scope.$watch("data", function(newVal, oldVal){
+  //   if (newVal !== null && angular.isDefined(newVal) && newVal !== oldVal) {
+  //     $scope.data.push(angular.toJson(newVal));
+  //   }
+  // });
 
 }]);
 
