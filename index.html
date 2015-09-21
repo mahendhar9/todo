@@ -13,7 +13,11 @@
 
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <script src="js/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
+  <!-- Firebase -->
+  <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+  <!-- AngularFire -->
+  <script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
   <script src="js/app.js"></script>
   <script src="js/main.js"></script>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -24,27 +28,35 @@
       <![endif]-->
     </head>
     <body ng-controller = "todoController">
-      <div class="row todo-row">
-        <div class="col-md-offset-4 col-md-4 text-center">
-          <ul id="sortable">
-            <div ng-repeat = "todo in todos" class = "form-inline">
-              <li>
-                <input type = "checkbox", class="checkbox", ng-model = "todo.done" />
-                <input type = "text", class="form-control", ng-model = "todo.text" id = "taskText" data-order="$index" />
-                <a href = "" ng-click = "move($index, 'up')"><i class="fa fa-arrow-up"></i></a>
-                <a href = "" ng-click = "move($index, 'down')"><i class="fa fa-arrow-down"></i></a>
-                <a href = "" ng-click = "deleteTask($index)"><i class="fa fa-trash-o"></i></a>
+      <div class="row add-todo-row">
+        <div class="col-md-12 text-center">
+          <form ng-submit = "addTodo()" >
+           <div class="form-group form-inline">
+            <input type = "text", class="form-control", ng-model = "newTodoText" />
+            <input type = "submit", value = "Add Todo", class="form-control submit-btn btn-primary" />
+          </div>
+        </div>
+        </form>
+    </div>
+    <div class="row todos-row">
+      <div class="col-md-offset-3 col-md-6 text-center">
+        <ul id="sortable">
+          <div ng-repeat = "todo in todos" class = "form-inline">
+            <li>
+              <input type = "checkbox"  ng-model = "todo.done" />
+              <input type = "text" class="form-control" ng-model = "todo.text" id = "taskText" data-order="$index" />
+                <!-- <a href = "" ng-click = "move($index, 'up')"><i class="fa fa-arrow-up"></i></a>
+                <a href = "" ng-click = "move($index, 'down')"><i class="fa fa-arrow-down"></i></a> -->
+                <span class="handle"><i class="fa fa-arrows fa-lg"></i></span>
+                <a href = "" ng-click = "deleteTask($index)"><i class="fa fa-trash-o fa-lg"></i></a>
+                <hr>
               </li>
             </div>
           </ul>
         </div>
-        <form ng-submit = "addTodo()" >
-         <div class="form-group form-inline">
-          <input type = "text", class="form-control", ng-model = "newTodoText" />
-          <input type = "submit", class="form-control submit-btn btn-primary" />
-        </div>
-      </form>
-    </div>
-  </div>
-</body>
-</html>
+      </div>
+
+  
+      <span class="todo-json">The todos are {{ todos | json }}</span>
+    </body>
+    </html>

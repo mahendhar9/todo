@@ -1,6 +1,8 @@
 $(document).ready(function(){
 
-  $('#sortable').sortable();
+  $('#sortable').sortable({
+    handle: '.handle'
+    });
   $( "#sortable" ).disableSelection();
 
 });

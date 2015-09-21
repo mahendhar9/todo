@@ -2,13 +2,29 @@ body {
   overflow-x: hidden;
 }
 
-.todo-row {
+.add-todo-row {
   margin-top: 50px;
 }
 
-input[type='text'] {
-  margin: 10px 0 0 5px;
+.todos-row {
+  margin-top: 30px;
 }
+
+#sortable input[type='text'] {
+  border: none;
+  box-shadow:none;
+  font-size: 18px;
+  margin: 10px 0 0 5px;
+  width: 45%;
+}
+
+input[type="checkbox"]{
+  width: 15px; 
+  height: 15px;
+  position: relative;
+  top: 8px;
+}
+
 
 ul li {
   list-style: none;
@@ -18,7 +34,19 @@ ul li {
   color: red;
 }
 
-.submit-btn {
-  margin-top: 9px;
+.fa {
+  position: relative;
+  top: 5px;
+  margin-right: 7px;
 }
 
+hr {
+  margin: 10px 0px;
+}
+
+.todo-json {
+  position:relative;
+  top: 70px;
+  left: 50px;
+  right: 50px;
+}
