@@ -1,10 +1,32 @@
-var todoApp = angular.module('todoApp',['firebase', 'ui.sortable']);
+var todoApp = angular.module('todoApp',['firebase', 'ngRoute', 'ui.sortable']);
 
-todoApp.controller('todoController', ['$scope', '$firebaseArray', function($scope, $firebaseArray){
+todoApp.config(function($routeProvider) {
+  $routeProvider
+  .when('/', {
+    templateUrl: 'pages/home.html',
+    controller: 'todoController'
+  })
 
-  var fireData = new Firebase('https://dazzling-torch-2041.firebaseio.com');
+  .when('/register', {
+    templateUrl: 'pages/register.html',
+    controller: 'registerController'
+  })
   
-  $scope.tasks = $firebaseArray(fireData);
+  .when('/login', {
+    templateUrl: 'pages/login.html',
+    controller: 'loginController'
+  })
+});
+
+todoApp.service('firebaseService', function() {
+  this.fireData = new Firebase('https://dazzling-torch-2041.firebaseio.com');
+
+});
+
+
+todoApp.controller('todoController', ['$scope', '$firebaseArray', 'firebaseService', function($scope, $firebaseArray, firebaseService){
+  var datafire = firebaseService.fireData;
+  $scope.tasks = $firebaseArray(datafire);
 
   $scope.addTask = function() {
     var length = $scope.tasks.length;
@@ -44,6 +66,43 @@ todoApp.controller('todoController', ['$scope', '$firebaseArray', function($scop
     console.log(index);
     $scope.tasks.$save(index);
   };
+}]);
+
+//Register Controller
+todoApp.controller('registerController', ['$scope', 'firebaseService', function($scope, firebaseService){
+  var userData = firebaseService.fireData;
+  $scope.registerUser = function() {
+    userData.createUser({
+      email    : $scope.email,
+      password : $scope.password
+    }, function(error, userData) {
+      if (error) {
+        $scope.message = "" + error;
+      } else {
+        $scope.message = "You have successfully Signed Up!";      
+      }
+    });
+    $scope.email = '';
+    $scope.password = '';
+  };
+}]);
+
+todoApp.controller('loginController', ['$scope', 'firebaseService', function($scope, firebaseService) {
+  var loginData = firebaseService.fireData;
+  $scope.loginUser = function() {
+    loginData.authWithPassword({
+      email    : $scope.loginEmail,
+      password : $scope.loginPassword
+      }, function(error, authData) {
+      if (error) {
+        $scope.loginMessage = error;
+      } else {
+        $scope.loginMessage = "You are successfully logged in";
+      }
+    });
+   $scope.loginEmail = '';
+   $scope.loginPassword = '';
+  }
 }]);
 
 

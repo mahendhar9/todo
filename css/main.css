@@ -54,3 +54,11 @@ hr {
   left: 50px;
   right: 50px;
 }
+
+.register-row {
+  margin-top: 81px;
+}
+
+.btn-primary {
+  width: 100%;
+}

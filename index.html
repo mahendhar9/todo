@@ -8,12 +8,13 @@
   <title>ToDo App</title>
   
   <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
   <link href="css/main.css" rel="stylesheet">
 
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
+  <script src="js/jquery-2.1.4.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/angular-route.min.js"></script>
   <!-- Firebase -->
   <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
   <!-- AngularFire -->
@@ -22,41 +23,13 @@
   <script src="js/app.js"></script>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
-    </head>
-    <body ng-controller = "todoController">
-      <div class="row add-todo-row">
-        <div class="col-md-12 text-center">
-          <form ng-submit = "addTask()" >
-           <div class="form-group form-inline">
-            <input type = "text", class="form-control", ng-model = "newTodoText" />
-            <input type = "submit", value = "Add Todo", class="form-control submit-btn btn-primary" />
-          </div>
-        </div>
-        </form>
-    </div>
-    <div class="row todos-row">
-      <div class="col-md-offset-3 col-md-6 text-center">
-        <ul ui-sortable="sortableOptions" ng-model = "tasks" id="sortable">
-          <div ng-repeat = "task in tasks| orderBy:'position'" class = "form-inline">
-            <li>
-              <input type = "checkbox"  ng-model = "task.done" ng-change = "updateDone($index)" />
-              <input type = "text" class="form-control" ng-model = "task.text" id = "taskText" ng-class = "{'checkedClass' : task.done}" />
-                <!-- <a href = "" ng-click = "move($index, 'up')"><i class="fa fa-arrow-up"></i></a>
-                <a href = "" ng-click = "move($index, 'down')"><i class="fa fa-arrow-down"></i></a> -->
-                <span class="handle"><i class="fa fa-arrows fa-lg"></i></span>
-                <a href = "" ng-click = "deleteTask($index)"><i class="fa fa-trash-o fa-lg"></i></a>
-                <hr>
-              </li>
-            </div>
-          </ul>
-        </div>
-      </div>
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+  <body>
+    <div ng-view ></div>
 
-  
-      <span class="todo-json">The todos are {{ tasks | json }}</span>
-    </body>
-    </html>
+  </body>
+</html>
