@@ -44,6 +44,10 @@ hr {
   margin: 10px 0px;
 }
 
+.checkedClass {
+  text-decoration: line-through;
+}
+
 .todo-json {
   position:relative;
   top: 70px;

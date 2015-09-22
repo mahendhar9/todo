@@ -44,7 +44,7 @@ todoApp.controller('todoController', ['$scope', '$firebaseArray', function($scop
     console.log(index);
     $scope.tasks.$save(index);
   };
-
 }]);
+
 
 

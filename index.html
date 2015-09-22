@@ -44,7 +44,7 @@
           <div ng-repeat = "task in tasks| orderBy:'position'" class = "form-inline">
             <li>
               <input type = "checkbox"  ng-model = "task.done" ng-change = "updateDone($index)" />
-              <input type = "text" class="form-control" ng-model = "task.text" id = "taskText" data-order="$index" />
+              <input type = "text" class="form-control" ng-model = "task.text" id = "taskText" ng-class = "{'checkedClass' : task.done}" />
                 <!-- <a href = "" ng-click = "move($index, 'up')"><i class="fa fa-arrow-up"></i></a>
                 <a href = "" ng-click = "move($index, 'down')"><i class="fa fa-arrow-down"></i></a> -->
                 <span class="handle"><i class="fa fa-arrows fa-lg"></i></span>
